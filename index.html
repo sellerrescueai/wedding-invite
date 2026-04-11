@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Neha & Pranit - Wedding Invitation</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Floating Petals Canvas -->
+    <div id="petals-container"></div>
+
+    <!-- Audio Player -->
+    <div id="audio-player">
+        <!-- Default: Play Button -->
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+    </div>
+    <!-- Allow user to drop their custom file here -->
+    <audio id="bg-music" loop>
+        <source src="music/background.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- ======== Hero Section ======== -->
+    <section class="hero glass-card" style="border:none; border-radius:0; background:transparent; box-shadow:none;">
+        <h2 class="section-subtitle reveal">Join us to celebrate the beautiful union of</h2>
+        <h1 class="hero-names cursive stagger-text">Dr. Neha & Pranit</h1>
+        <p class="reveal" style="font-size: 1.2rem; margin-top:2rem;">17 May 2026 | Maharashtra</p>
+        
+        <div class="countdown-wrapper reveal">
+            <div class="countdown-item">
+                <span class="countdown-number" id="days">00</span>
+                <span class="countdown-label">Days</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="hours">00</span>
+                <span class="countdown-label">Hours</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="minutes">00</span>
+                <span class="countdown-label">Mins</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="seconds">00</span>
+                <span class="countdown-label">Secs</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======== Family Section ======== -->
+    <section class="reveal">
+        <div class="glass-card text-center" style="max-width: 800px;">
+            <h2 class="section-title cursive">Our Family</h2>
+            <br>
+            <h3 style="color: var(--accent-sage);">Bride's Family</h3>
+            <p><strong>Parents:</strong> Ashok Zagade & Maya Zagade</p>
+            <p><strong>Grandparents:</strong> Late Chandrabhaga Zagade & Late Khanderao Zagade</p>
+            <br>
+            <h3 style="color: var(--accent-sage);">Groom's Family</h3>
+            <p><strong>Parents:</strong> Prafull Kamble & Shukla Kamble</p>
+        </div>
+    </section>
+
+    <!-- ======== Events Section ======== -->
+    <section class="reveal">
+        <h2 class="section-title cursive">Wedding Events</h2>
+        <p class="section-subtitle">A celebration of love and togetherness</p>
+        
+        <div class="events-grid">
+            <div class="glass-card event-card">
+                <h3 class="cursive">Mehendi</h3>
+                <p>15 May 2026, 11:00 AM</p>
+                <a href="mehendi.html" class="btn btn-secondary" style="margin-top:1rem; padding: 0.5rem 1.5rem;">Details</a>
+            </div>
+            <div class="glass-card event-card">
+                <h3 class="cursive">Sangeet</h3>
+                <p>16 May 2026, 6:00 PM</p>
+                <a href="sangeet.html" class="btn btn-secondary" style="margin-top:1rem; padding: 0.5rem 1.5rem;">Details</a>
+            </div>
+            <div class="glass-card event-card">
+                <h3 class="cursive">Engagement</h3>
+                <p>16 May 2026, 7:00 PM</p>
+                <a href="engagement.html" class="btn btn-secondary" style="margin-top:1rem; padding: 0.5rem 1.5rem;">Details</a>
+            </div>
+            <div class="glass-card event-card">
+                <h3 class="cursive">Haldi</h3>
+                <p>16 May 2026, 8:00 PM</p>
+                <a href="haldi.html" class="btn btn-secondary" style="margin-top:1rem; padding: 0.5rem 1.5rem;">Details</a>
+            </div>
+            <div class="glass-card event-card" style="border: 2px solid var(--accent-gold);">
+                <h3 class="cursive">Mangal Parinay</h3>
+                <p>17 May 2026, 12:45 PM</p>
+                <a href="wedding.html" class="btn" style="margin-top:1rem; padding: 0.5rem 1.5rem;">Details</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======== Gallery Section ======== -->
+    <section class="reveal">
+        <h2 class="section-title cursive">Moments</h2>
+        <div class="gallery-grid" id="gallery-container">
+            <!-- Placeholders -->
+            <div class="glass-card gallery-item" style="display:flex; justify-content:center; align-items:center;">
+                <span style="color:#aaa;">photo1.jpg</span>
+            </div>
+            <div class="glass-card gallery-item" style="display:flex; justify-content:center; align-items:center;">
+                <span style="color:#aaa;">photo2.jpg</span>
+            </div>
+            <div class="glass-card gallery-item" style="display:flex; justify-content:center; align-items:center;">
+                <span style="color:#aaa;">photo3.jpg</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======== Location & RSVP ======== -->
+    <section class="reveal text-center">
+        <div class="glass-card" style="max-width: 800px; width: 100%;">
+            <h2 class="section-title cursive">Join Us</h2>
+            <p><strong>Venue:</strong> Gyandev Mangal Karyalaya<br> Ring Rd, Walmiki Nagar, Khadgaon, Maharashtra 413531</p>
+            
+            <br>
+            <a href="https://share.google/0qYRnwXA4WcKSzz0n" target="_blank" class="btn btn-secondary" style="margin-bottom: 2rem;">Open Google Maps</a>
+            <br>
+            
+            <h3 style="margin: 2rem 0 1rem; color: var(--accent-sage);">Bless Us With Your Presence</h3>
+            <a href="#" id="rsvp-btn" class="btn">RSVP on WhatsApp</a>
+        </div>
+    </section>
+
+    <script src="js/config.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
