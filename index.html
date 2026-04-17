@@ -3,127 +3,376 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Neha & Pranit - Wedding Invitation</title>
+    <title>Neha & Pranit — Wedding Celebration</title>
+    <meta name="description" content="You are cordially invited to celebrate the wedding of Neha & Pranit. May 2026, Maharashtra.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400&family=Great+Vibes&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Floating Petals Canvas -->
-    <div id="petals-container"></div>
 
-    <!-- Audio Player -->
-    <div id="audio-player">
-        <!-- Default: Play Button -->
-        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+    <!-- Floating Petals -->
+    <div id="petals-container" aria-hidden="true"></div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" aria-hidden="true">
+        <button class="lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
+        <img id="lightbox-img" src="" alt="">
     </div>
-    <!-- Allow user to drop their custom file here -->
+
+    <!-- Music Toggle -->
+    <button id="audio-toggle" class="music-btn" aria-label="Toggle music">
+        <svg class="music-icon music-icon--play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <svg class="music-icon music-icon--pause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+    </button>
     <audio id="bg-music" loop>
         <source src="music/background.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
     </audio>
 
-    <!-- ======== Hero Section ======== -->
-    <section class="hero glass-card" style="border:none; border-radius:0; background:transparent; box-shadow:none;">
-        <h2 class="section-subtitle reveal">Join us to celebrate the beautiful union of</h2>
-        <h1 class="hero-names cursive stagger-text">Dr. Neha & Pranit</h1>
-        <p class="reveal" style="font-size: 1.2rem; margin-top:2rem;">17 May 2026 | Maharashtra</p>
-        
-        <div class="countdown-wrapper reveal">
-            <div class="countdown-item">
-                <span class="countdown-number" id="days">00</span>
-                <span class="countdown-label">Days</span>
+    <!-- ═══════════════════════════════════════════
+         SCREEN 1 — HERO / OPENING
+         ═══════════════════════════════════════════ -->
+    <section class="screen screen--hero" id="hero">
+        <div class="screen__bg" style="background-image:url('images/hero-texture.png')"></div>
+        <div class="screen__overlay"></div>
+
+        <!-- Ashoka Chakra watermark -->
+        <div class="watermark watermark--hero" aria-hidden="true">
+            <svg viewBox="0 0 200 200" class="ashoka-chakra">
+                <circle cx="100" cy="100" r="90" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                <circle cx="100" cy="100" r="20" fill="none" stroke="currentColor" stroke-width="1.2"/>
+                <circle cx="100" cy="100" r="6" fill="currentColor"/>
+                <!-- 24 spokes of Ashoka Chakra -->
+                <g stroke="currentColor" stroke-width="1">
+                    <line x1="100" y1="10" x2="100" y2="80"/>
+                    <line x1="100" y1="120" x2="100" y2="190"/>
+                    <line x1="10" y1="100" x2="80" y2="100"/>
+                    <line x1="120" y1="100" x2="190" y2="100"/>
+                    <line x1="36.4" y1="36.4" x2="85.9" y2="85.9"/>
+                    <line x1="114.1" y1="114.1" x2="163.6" y2="163.6"/>
+                    <line x1="163.6" y1="36.4" x2="114.1" y2="85.9"/>
+                    <line x1="85.9" y1="114.1" x2="36.4" y2="163.6"/>
+                    <line x1="66.9" y1="18.6" x2="91.3" y2="83"/>
+                    <line x1="108.7" y1="117" x2="133.1" y2="181.4"/>
+                    <line x1="133.1" y1="18.6" x2="108.7" y2="83"/>
+                    <line x1="91.3" y1="117" x2="66.9" y2="181.4"/>
+                    <line x1="18.6" y1="66.9" x2="83" y2="91.3"/>
+                    <line x1="117" y1="108.7" x2="181.4" y2="133.1"/>
+                    <line x1="18.6" y1="133.1" x2="83" y2="108.7"/>
+                    <line x1="117" y1="91.3" x2="181.4" y2="66.9"/>
+                    <line x1="48.2" y1="25.2" x2="88" y2="86.5"/>
+                    <line x1="112" y1="113.5" x2="151.8" y2="174.8"/>
+                    <line x1="151.8" y1="25.2" x2="112" y2="86.5"/>
+                    <line x1="88" y1="113.5" x2="48.2" y2="174.8"/>
+                    <line x1="25.2" y1="48.2" x2="86.5" y2="88"/>
+                    <line x1="113.5" y1="112" x2="174.8" y2="151.8"/>
+                    <line x1="25.2" y1="151.8" x2="86.5" y2="112"/>
+                    <line x1="113.5" y1="88" x2="174.8" y2="48.2"/>
+                </g>
+            </svg>
+        </div>
+
+        <div class="hero__content">
+            <!-- Dhamma Chakra — prominent at the top -->
+            <div class="hero-dhamma-chakra anim-up" data-delay="0">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Outer rim -->
+                    <circle cx="100" cy="100" r="92" fill="none" stroke="#D4AF37" stroke-width="2.5"/>
+                    <circle cx="100" cy="100" r="85" fill="none" stroke="#D4AF37" stroke-width="0.5" opacity="0.4"/>
+                    <!-- Hub -->
+                    <circle cx="100" cy="100" r="22" fill="none" stroke="#D4AF37" stroke-width="2"/>
+                    <circle cx="100" cy="100" r="7" fill="#D4AF37"/>
+                    <!-- 24 symmetrical spokes -->
+                    <g stroke="#D4AF37" stroke-width="1.3">
+                        <line x1="122.0" y1="100.0" x2="192.0" y2="100.0"/>
+                        <line x1="121.3" y1="105.7" x2="188.9" y2="123.8"/>
+                        <line x1="119.1" y1="111.0" x2="179.7" y2="146.0"/>
+                        <line x1="115.6" y1="115.6" x2="165.1" y2="165.1"/>
+                        <line x1="111.0" y1="119.1" x2="146.0" y2="179.7"/>
+                        <line x1="105.7" y1="121.3" x2="123.8" y2="188.9"/>
+                        <line x1="100.0" y1="122.0" x2="100.0" y2="192.0"/>
+                        <line x1="94.3" y1="121.3" x2="76.2" y2="188.9"/>
+                        <line x1="89.0" y1="119.1" x2="54.0" y2="179.7"/>
+                        <line x1="84.4" y1="115.6" x2="34.9" y2="165.1"/>
+                        <line x1="80.9" y1="111.0" x2="20.3" y2="146.0"/>
+                        <line x1="78.7" y1="105.7" x2="11.1" y2="123.8"/>
+                        <line x1="78.0" y1="100.0" x2="8.0" y2="100.0"/>
+                        <line x1="78.7" y1="94.3" x2="11.1" y2="76.2"/>
+                        <line x1="80.9" y1="89.0" x2="20.3" y2="54.0"/>
+                        <line x1="84.4" y1="84.4" x2="34.9" y2="34.9"/>
+                        <line x1="89.0" y1="80.9" x2="54.0" y2="20.3"/>
+                        <line x1="94.3" y1="78.7" x2="76.2" y2="11.1"/>
+                        <line x1="100.0" y1="78.0" x2="100.0" y2="8.0"/>
+                        <line x1="105.7" y1="78.7" x2="123.8" y2="11.1"/>
+                        <line x1="111.0" y1="80.9" x2="146.0" y2="20.3"/>
+                        <line x1="115.6" y1="84.4" x2="165.1" y2="34.9"/>
+                        <line x1="119.1" y1="89.0" x2="179.7" y2="54.0"/>
+                        <line x1="121.3" y1="94.3" x2="188.9" y2="76.2"/>
+                    </g>
+                    <!-- Small decorative circles at cardinal points -->
+                    <circle cx="100" cy="8" r="3" fill="#D4AF37" opacity="0.6"/>
+                    <circle cx="100" cy="192" r="3" fill="#D4AF37" opacity="0.6"/>
+                    <circle cx="8" cy="100" r="3" fill="#D4AF37" opacity="0.6"/>
+                    <circle cx="192" cy="100" r="3" fill="#D4AF37" opacity="0.6"/>
+                </svg>
             </div>
-            <div class="countdown-item">
-                <span class="countdown-number" id="hours">00</span>
-                <span class="countdown-label">Hours</span>
+
+            <p class="hero__blessings anim-up" data-delay="0">With the blessings of our beloved families</p>
+
+            <div class="hero__family anim-up" data-delay="1">
+                <p class="hero__parents">Ashok Zagade &amp; Maya Zagade</p>
+                <span class="hero__divider-line"></span>
+                <p class="hero__parents">Prafull Kamble &amp; Shukla Kamble</p>
             </div>
-            <div class="countdown-item">
-                <span class="countdown-number" id="minutes">00</span>
-                <span class="countdown-label">Mins</span>
+
+            <p class="hero__invite-label anim-up" data-delay="2">INVITE YOU</p>
+            <p class="hero__invite-sub anim-up" data-delay="2">to join us in the wedding celebrations of</p>
+
+            <h1 class="hero__names anim-up" data-delay="3">
+                <span class="hero__name">Neha</span>
+                <span class="hero__amp">&amp;</span>
+                <span class="hero__name">Pranit</span>
+            </h1>
+        </div>
+
+        <div class="scroll-cue anim-up" data-delay="4">
+            <span></span>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         SCREEN 2 — COUPLE PORTRAIT
+         ═══════════════════════════════════════════ -->
+    <section class="screen screen--couple" id="couple">
+        <div class="couple__image-wrap">
+            <img src="images/couple-1.png" alt="Neha & Pranit" class="couple__photo reveal-el" loading="lazy">
+        </div>
+        <div class="couple__text reveal-el">
+            <p class="label">meet the</p>
+            <h2 class="heading-display">bride <em>&amp;</em> groom</h2>
+            <p class="body-copy">We are both so delighted that you are able to join us in celebrating what we hope will be one of the happiest days of our lives. The affection shown to us by so many people has been incredibly moving, and has touched us both deeply. We look forward to seeing you at the wedding.</p>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         SCREEN 3 — EVENTS
+         ═══════════════════════════════════════════ -->
+    <section class="screen screen--events" id="events">
+        <div class="screen__bg" style="background-image:url('images/events-texture.png')"></div>
+        <div class="screen__overlay"></div>
+
+        <div class="events__content">
+            <p class="label label--light reveal-el">On the following events</p>
+
+            <div class="events__carousel" id="eventsCarousel">
+                <div class="event-slide active" data-index="0">
+                    <h3 class="event__name">Mehendi</h3>
+                    <p class="event__date">Friday, May 15th 2026</p>
+                    <p class="event__venue">Bride's Home</p>
+                    <p class="event__time">11 AM Onwards</p>
+                </div>
+                <div class="event-slide" data-index="1">
+                    <h3 class="event__name">Sangeet</h3>
+                    <p class="event__date">Saturday, May 16th 2026</p>
+                    <p class="event__venue">Gyandev Mangal Karyalaya</p>
+                    <p class="event__time">6 PM Onwards</p>
+                </div>
+                <div class="event-slide" data-index="2">
+                    <h3 class="event__name">Engagement</h3>
+                    <p class="event__date">Saturday, May 16th 2026</p>
+                    <p class="event__venue">Gyandev Mangal Karyalaya</p>
+                    <p class="event__time">7 PM Onwards</p>
+                </div>
+                <div class="event-slide" data-index="3">
+                    <h3 class="event__name">Haldi</h3>
+                    <p class="event__date">Saturday, May 16th 2026</p>
+                    <p class="event__venue">Gyandev Mangal Karyalaya</p>
+                    <p class="event__time">8 PM Onwards</p>
+                </div>
+                <div class="event-slide" data-index="4">
+                    <h3 class="event__name">Mangal Parinay</h3>
+                    <p class="event__date">Sunday, May 17th 2026</p>
+                    <p class="event__venue">Gyandev Mangal Karyalaya</p>
+                    <p class="event__time">12:45 PM</p>
+                </div>
             </div>
-            <div class="countdown-item">
-                <span class="countdown-number" id="seconds">00</span>
-                <span class="countdown-label">Secs</span>
+
+            <div class="events__dots" id="eventsDots">
+                <button class="dot active" data-index="0" aria-label="Mehendi"></button>
+                <button class="dot" data-index="1" aria-label="Sangeet"></button>
+                <button class="dot" data-index="2" aria-label="Engagement"></button>
+                <button class="dot" data-index="3" aria-label="Haldi"></button>
+                <button class="dot" data-index="4" aria-label="Mangal Parinay"></button>
+            </div>
+
+            <a href="https://share.google/0qYRnwXA4WcKSzz0n" target="_blank" rel="noopener" class="event__map-btn reveal-el">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+                See the route
+            </a>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         SCREEN 4 — COUPLE PHOTO 2 (Full bleed)
+         ═══════════════════════════════════════════ -->
+    <section class="screen screen--photo-break" id="photo2">
+        <div class="photo-break__img" style="background-image:url('images/couple-2.png')"></div>
+        <div class="screen__overlay screen__overlay--light"></div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         SCREEN 5 — RSVP
+         ═══════════════════════════════════════════ -->
+    <section class="screen screen--rsvp" id="rsvp">
+        <div class="rsvp__content">
+            <p class="label reveal-el">Please</p>
+            <h2 class="heading-display reveal-el" style="margin-bottom: 16px;">RSVP</h2>
+            <p class="body-copy reveal-el" style="max-width: 340px; margin: 0 auto 36px;">We would be honoured by your gracious presence as we celebrate this joyous occasion.</p>
+
+            <a href="#" id="rsvp-btn" class="whatsapp-btn reveal-el">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Message on WhatsApp
+            </a>
+
+            <p class="rsvp__call reveal-el">or call <strong>+91 9529822207</strong></p>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         SCREEN 6 — THINGS TO KNOW
+         ═══════════════════════════════════════════ -->
+    <section class="screen screen--info" id="info">
+        <div class="info__content">
+            <p class="label reveal-el">Things to know</p>
+            <p class="body-copy reveal-el" style="max-width:380px; margin: 8px auto 40px;">To help you feel at ease and enjoy every moment of the celebrations, here are a few thoughtful details.</p>
+
+            <div class="info__grid">
+                <div class="info__card reveal-el">
+                    <div class="info__icon">📸</div>
+                    <h4 class="info__title">Shared Gallery</h4>
+                    <p class="info__desc">Upload & view candid photos from all ceremonies in our shared album.</p>
+                    <a href="#" id="drive-link" class="info__link" target="_blank" rel="noopener">Open Google Drive →</a>
+                </div>
+                <div class="info__card reveal-el">
+                    <div class="info__icon">📍</div>
+                    <h4 class="info__title">Venue</h4>
+                    <p class="info__desc">Gyandev Mangal Karyalaya, Ring Rd, Walmiki Nagar, Khadgaon, Maharashtra 413531</p>
+                </div>
+                <div class="info__card reveal-el">
+                    <div class="info__icon">👔</div>
+                    <h4 class="info__title">Dress Code</h4>
+                    <p class="info__desc">Traditional / Semi-formal. Wear your finest ethnic wear!</p>
+                </div>
+                <div class="info__card reveal-el">
+                    <div class="info__icon">🅿️</div>
+                    <h4 class="info__title">Parking</h4>
+                    <p class="info__desc">Ample parking is available at the venue for all guests.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- ======== Family Section ======== -->
-    <section class="reveal">
-        <div class="glass-card text-center" style="max-width: 800px;">
-            <h2 class="section-title cursive">Our Family</h2>
-            <br>
-            <h3 style="color: var(--accent-sage);">Bride's Family</h3>
-            <p><strong>Parents:</strong> Ashok Zagade & Maya Zagade</p>
-            <p><strong>Grandparents:</strong> Late Chandrabhaga Zagade & Late Khanderao Zagade</p>
-            <br>
-            <h3 style="color: var(--accent-sage);">Groom's Family</h3>
-            <p><strong>Parents:</strong> Prafull Kamble & Shukla Kamble</p>
-        </div>
-    </section>
+    <!-- ═══════════════════════════════════════════
+         SCREEN 7 — COUNTDOWN / CLOSING
+         ═══════════════════════════════════════════ -->
+    <section class="screen screen--closing" id="closing">
+        <div class="screen__bg" style="background-image:url('images/closing-texture.png')"></div>
+        <div class="screen__overlay"></div>
 
-    <!-- ======== Events Section ======== -->
-    <section class="reveal">
-        <h2 class="section-title cursive">Wedding Events</h2>
-        <p class="section-subtitle">A celebration of love and togetherness</p>
-        
-        <div class="events-grid">
-            <div class="glass-card event-card">
-                <h3 class="cursive">Mehendi</h3>
-                <p>15 May 2026, 11:00 AM</p>
-                <a href="mehendi.html" class="btn btn-secondary" style="margin-top:1rem; padding: 0.5rem 1.5rem;">Details</a>
-            </div>
-            <div class="glass-card event-card">
-                <h3 class="cursive">Sangeet</h3>
-                <p>16 May 2026, 6:00 PM</p>
-                <a href="sangeet.html" class="btn btn-secondary" style="margin-top:1rem; padding: 0.5rem 1.5rem;">Details</a>
-            </div>
-            <div class="glass-card event-card">
-                <h3 class="cursive">Engagement</h3>
-                <p>16 May 2026, 7:00 PM</p>
-                <a href="engagement.html" class="btn btn-secondary" style="margin-top:1rem; padding: 0.5rem 1.5rem;">Details</a>
-            </div>
-            <div class="glass-card event-card">
-                <h3 class="cursive">Haldi</h3>
-                <p>16 May 2026, 8:00 PM</p>
-                <a href="haldi.html" class="btn btn-secondary" style="margin-top:1rem; padding: 0.5rem 1.5rem;">Details</a>
-            </div>
-            <div class="glass-card event-card" style="border: 2px solid var(--accent-gold);">
-                <h3 class="cursive">Mangal Parinay</h3>
-                <p>17 May 2026, 12:45 PM</p>
-                <a href="wedding.html" class="btn" style="margin-top:1rem; padding: 0.5rem 1.5rem;">Details</a>
-            </div>
+        <!-- Buddha's Mudra watermark -->
+        <div class="watermark watermark--closing" aria-hidden="true">
+            <svg viewBox="0 0 120 180" class="buddha-mudra" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round">
+                <!-- Simplified Abhaya Mudra (Buddha's right hand raised, palm facing outward) -->
+                <!-- Palm -->
+                <ellipse cx="60" cy="80" rx="22" ry="30"/>
+                <!-- Fingers -->
+                <line x1="42" y1="62" x2="40" y2="35"/>
+                <line x1="50" y1="54" x2="48" y2="24"/>
+                <line x1="60" y1="50" x2="60" y2="18"/>
+                <line x1="70" y1="54" x2="72" y2="24"/>
+                <line x1="78" y1="62" x2="82" y2="38"/>
+                <!-- Finger tips (rounded) -->
+                <circle cx="40" cy="34" r="3"/>
+                <circle cx="48" cy="23" r="3"/>
+                <circle cx="60" cy="17" r="3"/>
+                <circle cx="72" cy="23" r="3"/>
+                <circle cx="82" cy="37" r="3"/>
+                <!-- Wrist -->
+                <line x1="46" y1="108" x2="46" y2="140"/>
+                <line x1="74" y1="108" x2="74" y2="140"/>
+                <!-- Thumb -->
+                <path d="M42 75 Q32 70 35 60"/>
+                <!-- Inner palm lines -->
+                <path d="M45 85 Q60 78 75 85" fill="none"/>
+                <path d="M48 95 Q60 90 72 95" fill="none"/>
+            </svg>
         </div>
-    </section>
 
-    <!-- ======== Gallery Section ======== -->
-    <section class="reveal">
-        <h2 class="section-title cursive">Moments</h2>
-        <div class="gallery-grid" id="gallery-container">
-            <!-- Placeholders -->
-            <div class="glass-card gallery-item" style="display:flex; justify-content:center; align-items:center;">
-                <span style="color:#aaa;">photo1.jpg</span>
-            </div>
-            <div class="glass-card gallery-item" style="display:flex; justify-content:center; align-items:center;">
-                <span style="color:#aaa;">photo2.jpg</span>
-            </div>
-            <div class="glass-card gallery-item" style="display:flex; justify-content:center; align-items:center;">
-                <span style="color:#aaa;">photo3.jpg</span>
-            </div>
-        </div>
-    </section>
+        <div class="closing__content">
+            <p class="label label--light reveal-el">The countdown begins</p>
 
-    <!-- ======== Location & RSVP ======== -->
-    <section class="reveal text-center">
-        <div class="glass-card" style="max-width: 800px; width: 100%;">
-            <h2 class="section-title cursive">Join Us</h2>
-            <p><strong>Venue:</strong> Gyandev Mangal Karyalaya<br> Ring Rd, Walmiki Nagar, Khadgaon, Maharashtra 413531</p>
-            
-            <br>
-            <a href="https://share.google/0qYRnwXA4WcKSzz0n" target="_blank" class="btn btn-secondary" style="margin-bottom: 2rem;">Open Google Maps</a>
-            <br>
-            
-            <h3 style="margin: 2rem 0 1rem; color: var(--accent-sage);">Bless Us With Your Presence</h3>
-            <a href="#" id="rsvp-btn" class="btn">RSVP on WhatsApp</a>
+            <div class="countdown reveal-el">
+                <div class="countdown__unit">
+                    <span class="countdown__num" id="days">00</span>
+                    <span class="countdown__label">Days</span>
+                </div>
+                <span class="countdown__sep">:</span>
+                <div class="countdown__unit">
+                    <span class="countdown__num" id="hours">00</span>
+                    <span class="countdown__label">Hours</span>
+                </div>
+                <span class="countdown__sep">:</span>
+                <div class="countdown__unit">
+                    <span class="countdown__num" id="minutes">00</span>
+                    <span class="countdown__label">Mins</span>
+                </div>
+                <span class="countdown__sep">:</span>
+                <div class="countdown__unit">
+                    <span class="countdown__num" id="seconds">00</span>
+                    <span class="countdown__label">Secs</span>
+                </div>
+            </div>
+
+            <p class="closing__msg reveal-el">Our families are excited that you are able to join us in celebrating what we hope will be one of the happiest days of our lives.</p>
+
+            <h2 class="closing__names reveal-el">Neha <em>&amp;</em> Pranit</h2>
+
+            <!-- Ashoka Chakra in footer -->
+            <div class="closing__chakra reveal-el" aria-hidden="true">
+                <svg viewBox="0 0 200 200" class="ashoka-chakra ashoka-chakra--small">
+                    <circle cx="100" cy="100" r="90" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                    <circle cx="100" cy="100" r="20" fill="none" stroke="currentColor" stroke-width="1.2"/>
+                    <circle cx="100" cy="100" r="6" fill="currentColor"/>
+                    <!-- 24 symmetrical spokes -->
+                    <g stroke="currentColor" stroke-width="1">
+                        <line x1="120.0" y1="100.0" x2="190.0" y2="100.0"/>
+                        <line x1="119.3" y1="105.2" x2="186.9" y2="123.3"/>
+                        <line x1="117.3" y1="110.0" x2="177.9" y2="145.0"/>
+                        <line x1="114.1" y1="114.1" x2="163.6" y2="163.6"/>
+                        <line x1="110.0" y1="117.3" x2="145.0" y2="177.9"/>
+                        <line x1="105.2" y1="119.3" x2="123.3" y2="186.9"/>
+                        <line x1="100.0" y1="120.0" x2="100.0" y2="190.0"/>
+                        <line x1="94.8" y1="119.3" x2="76.7" y2="186.9"/>
+                        <line x1="90.0" y1="117.3" x2="55.0" y2="177.9"/>
+                        <line x1="85.9" y1="114.1" x2="36.4" y2="163.6"/>
+                        <line x1="82.7" y1="110.0" x2="22.1" y2="145.0"/>
+                        <line x1="80.7" y1="105.2" x2="13.1" y2="123.3"/>
+                        <line x1="80.0" y1="100.0" x2="10.0" y2="100.0"/>
+                        <line x1="80.7" y1="94.8" x2="13.1" y2="76.7"/>
+                        <line x1="82.7" y1="90.0" x2="22.1" y2="55.0"/>
+                        <line x1="85.9" y1="85.9" x2="36.4" y2="36.4"/>
+                        <line x1="90.0" y1="82.7" x2="55.0" y2="22.1"/>
+                        <line x1="94.8" y1="80.7" x2="76.7" y2="13.1"/>
+                        <line x1="100.0" y1="80.0" x2="100.0" y2="10.0"/>
+                        <line x1="105.2" y1="80.7" x2="123.3" y2="13.1"/>
+                        <line x1="110.0" y1="82.7" x2="145.0" y2="22.1"/>
+                        <line x1="114.1" y1="85.9" x2="163.6" y2="36.4"/>
+                        <line x1="117.3" y1="90.0" x2="177.9" y2="55.0"/>
+                        <line x1="119.3" y1="94.8" x2="186.9" y2="76.7"/>
+                    </g>
+                </svg>
+            </div>
         </div>
     </section>
 

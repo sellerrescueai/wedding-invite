@@ -1,23 +1,12 @@
 const appConfig = {
-    // RSVP Details
-    whatsappNumber: "9529822207", // Country code + number without spaces or +
-    rsvpMessage: "I would love to attend Dr. Neha & Pranit's Buddhist Marathi Wedding. My name is [name] and I will attend the following events: [events]",
-    
-    // Couple & Wedding Details
-    couple: {
-        bride: "Dr. Neha",
-        groom: "Pranit"
-    },
-    weddingDate: "2026-05-17T12:45:00+05:30", // Countdown target (17 May 2026, 12:45 PM IST)
-    
-    // Gallery Placeholder Images 
-    // Add your image paths here to display in the gallery
+    whatsappNumber: "9529822207",
+    rsvpMessage: "I would love to attend Neha & Pranit's Wedding. My name is [name] and I will attend the following events: [events]",
+    couple: { bride: "Neha", groom: "Pranit" },
+    weddingDate: "2026-05-17T12:45:00+05:30",
+    // Public Google Drive link for shared candid photos
+    googleDriveLink: "https://drive.google.com/drive/folders/YOUR_FOLDER_ID?usp=sharing",
     galleryImages: [
-        "images/photo1.jpg",
-        "images/photo2.jpg",
-        "images/photo3.jpg",
-        "images/photo4.jpg",
-        "images/photo5.jpg",
-        "images/photo6.jpg"
+        "images/couple-1.png",
+        "images/couple-2.png"
     ]
 };

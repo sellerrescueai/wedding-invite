@@ -1,154 +1,161 @@
 document.addEventListener('DOMContentLoaded', () => {
-    initScrollReveal();
-    initPetals();
-    initAudio();
-    initCountdown();
-    initRsvp();
-    initStaggeredText();
+  initHeroAnim();
+  initReveal();
+  initPetals();
+  initAudio();
+  initCountdown();
+  initRsvp();
+  initEventsCarousel();
+  initLightbox();
 });
 
-// Scroll Reveal using Intersection Observer
-function initScrollReveal() {
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
-        });
-    }, { threshold: 0.1 });
-
-    reveals.forEach(reveal => observer.observe(reveal));
+/* ── Hero stagger animations ── */
+function initHeroAnim() {
+  const els = document.querySelectorAll('.anim-up');
+  els.forEach(el => {
+    const d = parseInt(el.dataset.delay || 0);
+    el.style.transitionDelay = `${d * 0.25 + 0.3}s`;
+    requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('visible')));
+  });
 }
 
-// Floating Petals Animation
+/* ── Scroll Reveal ── */
+function initReveal() {
+  const els = document.querySelectorAll('.reveal-el');
+  if (!els.length) return;
+  let idx = 0;
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const siblings = entry.target.parentElement.querySelectorAll('.reveal-el');
+        let i = 0;
+        siblings.forEach((s, si) => { if (s === entry.target) i = si; });
+        entry.target.style.transitionDelay = `${i * 0.12}s`;
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  els.forEach(el => obs.observe(el));
+}
+
+/* ── Floating Petals ── */
 function initPetals() {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) return;
-
-    const container = document.getElementById('petals-container');
-    if (!container) return;
-
-    const petalCount = 20; // Lightweight, not too many
-    const colors = ['#E8C7C8', '#D4AF37', '#FFF8F0'];
-
-    for (let i = 0; i < petalCount; i++) {
-        const petal = document.createElement('div');
-        petal.classList.add('petal');
-        
-        // Randomize properties
-        const size = Math.random() * 15 + 10;
-        const left = Math.random() * 100;
-        const duration = Math.random() * 10 + 10; // 10-20s
-        const delay = Math.random() * 10;
-        
-        const bgColor = colors[Math.floor(Math.random() * colors.length)];
-
-        petal.style.width = `${size}px`;
-        petal.style.height = `${size}px`;
-        petal.style.left = `${left}vw`;
-        petal.style.animationDuration = `${duration}s`;
-        petal.style.animationDelay = `-${delay}s`; // Start off-screen
-        
-        // Simple shape styling to mimic a petal
-        petal.style.backgroundColor = bgColor;
-        petal.style.borderRadius = '50% 0 50% 50%';
-        petal.style.opacity = '0.6';
-        petal.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)';
-
-        container.appendChild(petal);
-    }
+  if (window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  const c = document.getElementById('petals-container');
+  if (!c) return;
+  const colors = ['rgba(183,110,121,0.5)', 'rgba(212,175,55,0.5)', 'rgba(232,199,200,0.6)'];
+  for (let i = 0; i < 7; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    const sz = Math.random() * 5 + 10;
+    const op = (Math.random() * 0.1 + 0.12).toFixed(2);
+    const dr = (Math.random() - 0.5) * 80;
+    p.style.cssText = `width:${sz}px;height:${sz}px;left:${Math.random()*100}vw;top:-20px;background:${colors[i%3]};animation-duration:${Math.random()*10+15}s;animation-delay:-${Math.random()*15}s;--po:${op};--pd:${dr}px;`;
+    c.appendChild(p);
+  }
 }
 
-// Audio Player Logic
+/* ── Audio ── */
 function initAudio() {
-    const audioPlayer = document.getElementById('audio-player');
-    const audio = document.getElementById('bg-music');
-    if (!audioPlayer || !audio) return;
-
-    let isPlaying = false;
-
-    audioPlayer.addEventListener('click', () => {
-        if (isPlaying) {
-            audio.pause();
-            audioPlayer.innerHTML = `<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`; // Play Icon
-        } else {
-            audio.play().catch(e => console.log('Audio play failed', e));
-            audioPlayer.innerHTML = `<svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`; // Pause Icon
-        }
-        isPlaying = !isPlaying;
-    });
+  const btn = document.getElementById('audio-toggle');
+  const audio = document.getElementById('bg-music');
+  if (!btn || !audio) return;
+  let playing = false;
+  const playI = btn.querySelector('.music-icon--play');
+  const pauseI = btn.querySelector('.music-icon--pause');
+  btn.addEventListener('click', () => {
+    if (playing) { audio.pause(); playI.style.display=''; pauseI.style.display='none'; }
+    else { audio.play().catch(()=>{}); playI.style.display='none'; pauseI.style.display=''; }
+    playing = !playing;
+  });
 }
 
-// Countdown Logic
+/* ── Countdown ── */
 function initCountdown() {
-    if (!appConfig || !appConfig.weddingDate) return;
-
-    const targetDate = new Date(appConfig.weddingDate).getTime();
-    
-    const daysEl = document.getElementById('days');
-    const hoursEl = document.getElementById('hours');
-    const minutesEl = document.getElementById('minutes');
-    const secondsEl = document.getElementById('seconds');
-
-    if (!daysEl) return;
-
-    function update() {
-        const now = new Date().getTime();
-        const distance = targetDate - now;
-
-        if (distance < 0) {
-            daysEl.innerText = '00';
-            hoursEl.innerText = '00';
-            minutesEl.innerText = '00';
-            secondsEl.innerText = '00';
-            return;
-        }
-
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        daysEl.innerText = days < 10 ? '0'+days : days;
-        hoursEl.innerText = hours < 10 ? '0'+hours : hours;
-        minutesEl.innerText = minutes < 10 ? '0'+minutes : minutes;
-        secondsEl.innerText = seconds < 10 ? '0'+seconds : seconds;
-    }
-
-    update();
-    setInterval(update, 1000);
+  if (typeof appConfig === 'undefined' || !appConfig.weddingDate) return;
+  const t = new Date(appConfig.weddingDate).getTime();
+  const $ = id => document.getElementById(id);
+  const pad = n => n < 10 ? '0' + n : '' + n;
+  function tick() {
+    const d = t - Date.now();
+    if (d < 0) return;
+    $('days').textContent = pad(Math.floor(d/864e5));
+    $('hours').textContent = pad(Math.floor(d%864e5/36e5));
+    $('minutes').textContent = pad(Math.floor(d%36e5/6e4));
+    $('seconds').textContent = pad(Math.floor(d%6e4/1e3));
+  }
+  tick(); setInterval(tick, 1000);
 }
 
-// WhatsApp RSVP Logic
+/* ── RSVP ── */
 function initRsvp() {
-    const rsvpBtn = document.getElementById('rsvp-btn');
-    if (!rsvpBtn || !appConfig) return;
-
-    // We can allow users to fill out their names via prompt or just leave a placeholder
-    rsvpBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const number = appConfig.whatsappNumber;
-        const msg = encodeURIComponent(appConfig.rsvpMessage);
-        const url = `https://wa.me/${number}?text=${msg}`;
-        window.open(url, '_blank');
-    });
+  const btn = document.getElementById('rsvp-btn');
+  if (!btn || typeof appConfig === 'undefined') return;
+  btn.addEventListener('click', e => {
+    e.preventDefault();
+    window.open(`https://wa.me/${appConfig.whatsappNumber}?text=${encodeURIComponent(appConfig.rsvpMessage)}`, '_blank');
+  });
 }
 
-// Staggered Text Reveal
-function initStaggeredText() {
-    const staggers = document.querySelectorAll('.stagger-text');
-    staggers.forEach(stagger => {
-        const text = stagger.innerText;
-        stagger.innerText = '';
-        
-        let delay = 0;
-        [...text].forEach(char => {
-            const span = document.createElement('span');
-            span.innerText = char === ' ' ? '\u00A0' : char; // Preserve spaces
-            span.style.animationDelay = `${delay}s`;
-            stagger.appendChild(span);
-            delay += 0.05;
-        });
+/* ── Events Carousel ── */
+function initEventsCarousel() {
+  const slides = document.querySelectorAll('.event-slide');
+  const dots = document.querySelectorAll('.dot');
+  if (!slides.length) return;
+  let current = 0;
+  let autoTimer;
+
+  function goTo(i) {
+    slides.forEach(s => s.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+    slides[i].classList.add('active');
+    dots[i].classList.add('active');
+    current = i;
+  }
+
+  function next() { goTo((current + 1) % slides.length); }
+
+  dots.forEach(d => d.addEventListener('click', () => {
+    goTo(parseInt(d.dataset.index));
+    clearInterval(autoTimer);
+    autoTimer = setInterval(next, 4000);
+  }));
+
+  // Touch swipe
+  let startX = 0;
+  const carousel = document.getElementById('eventsCarousel');
+  if (carousel) {
+    carousel.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+    carousel.addEventListener('touchend', e => {
+      const diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) {
+        goTo(diff > 0 ? Math.min(current+1, slides.length-1) : Math.max(current-1, 0));
+        clearInterval(autoTimer);
+        autoTimer = setInterval(next, 4000);
+      }
+    }, { passive: true });
+  }
+
+  autoTimer = setInterval(next, 4000);
+}
+
+/* ── Lightbox ── */
+function initLightbox() {
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightbox-img');
+  const lbClose = document.getElementById('lightbox-close');
+  if (!lb) return;
+
+  document.querySelectorAll('[data-lightbox]').forEach(el => {
+    el.addEventListener('click', () => {
+      lbImg.src = el.dataset.lightbox;
+      lb.classList.add('active');
     });
+  });
+
+  function close() { lb.classList.remove('active'); lbImg.src = ''; }
+  if (lbClose) lbClose.addEventListener('click', close);
+  lb.addEventListener('click', e => { if (e.target === lb) close(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
 }
