@@ -1,6 +1,8 @@
-document.addEventListener('DOMContentLoaded', () => {
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initLanguage);
+} else {
   initLanguage();
-});
+}
 
 function initLanguage() {
   let savedLang = null;
@@ -11,14 +13,15 @@ function initLanguage() {
   }
   
   const popup = document.getElementById('language-popup');
+  if (!popup) return;
   
   if (savedLang && window.translations && window.translations[savedLang]) {
-    popup.setAttribute('aria-hidden', 'true');
-    popup.style.display = 'none';
+    popup.remove();
     applyLanguage(savedLang);
     startSite();
   } else {
     // Show popup
+    popup.style.display = 'flex';
     popup.setAttribute('aria-hidden', 'false');
     // Disable scrolling
     document.body.style.overflow = 'hidden';
@@ -26,7 +29,8 @@ function initLanguage() {
     // Add event listeners to buttons
     const btns = popup.querySelectorAll('.lang-btn');
     btns.forEach(btn => {
-      btn.addEventListener('click', (e) => {
+      btn.addEventListener('click', function handleLangClick(e) {
+        e.preventDefault();
         const lang = e.currentTarget.getAttribute('data-lang') || 'en';
         
         try {
@@ -37,16 +41,19 @@ function initLanguage() {
         
         applyLanguage(lang);
         
-        // Hide popup
-        popup.setAttribute('aria-hidden', 'true');
+        // Brutally remove the popup immediately
+        if (popup && popup.parentNode) {
+          popup.remove();
+        }
         document.body.style.overflow = '';
         
-        // Slight delay before starting animations so popup fade out is smooth
-        setTimeout(() => {
-          popup.style.display = 'none';
-          startSite();
-        }, 300);
+        startSite();
       });
+      // Fallback for tricky touch browsers
+      btn.addEventListener('touchend', function handleLangTouch(e) {
+        e.preventDefault();
+        btn.click();
+      }, { passive: false });
     });
   }
 }
