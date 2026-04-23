@@ -5,18 +5,20 @@ if (document.readyState === 'loading') {
 }
 
 function initLanguage() {
-  let savedLang = null;
+  var savedLang = null;
   try {
     savedLang = localStorage.getItem('preferredLanguage');
   } catch (err) {
     console.warn("localStorage not available", err);
   }
   
-  const popup = document.getElementById('language-popup');
+  var popup = document.getElementById('language-popup');
   if (!popup) return;
   
   if (savedLang && window.translations && window.translations[savedLang]) {
-    popup.remove();
+    if (popup.parentNode) {
+      popup.parentNode.removeChild(popup);
+    }
     applyLanguage(savedLang);
     startSite();
   } else {
@@ -26,12 +28,13 @@ function initLanguage() {
     // Disable scrolling
     document.body.style.overflow = 'hidden';
     
-    // Add event listeners to buttons
-    const btns = popup.querySelectorAll('.lang-btn');
-    btns.forEach(btn => {
+    // Add event listeners to buttons using for loop for older device compatibility
+    var btns = popup.querySelectorAll('.lang-btn');
+    for (var i = 0; i < btns.length; i++) {
+      var btn = btns[i];
       btn.addEventListener('click', function handleLangClick(e) {
         e.preventDefault();
-        const lang = e.currentTarget.getAttribute('data-lang') || 'en';
+        var lang = e.currentTarget.getAttribute('data-lang') || 'en';
         
         try {
           localStorage.setItem('preferredLanguage', lang);
@@ -43,7 +46,7 @@ function initLanguage() {
         
         // Brutally remove the popup immediately
         if (popup && popup.parentNode) {
-          popup.remove();
+          popup.parentNode.removeChild(popup);
         }
         document.body.style.overflow = '';
         
@@ -52,25 +55,27 @@ function initLanguage() {
       // Fallback for tricky touch browsers
       btn.addEventListener('touchend', function handleLangTouch(e) {
         e.preventDefault();
-        btn.click();
+        e.currentTarget.click();
       }, { passive: false });
-    });
+    }
   }
 }
 
 function applyLanguage(lang) {
   if (!window.translations) return;
-  const dict = window.translations[lang];
+  var dict = window.translations[lang];
   if (!dict) return;
   
   document.documentElement.lang = lang; // Update html lang attribute
   
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
+  var els = document.querySelectorAll('[data-i18n]');
+  for (var j = 0; j < els.length; j++) {
+    var el = els[j];
+    var key = el.getAttribute('data-i18n');
     if (dict[key]) {
-      el.innerHTML = dict[key]; // use innerHTML to allow tags like &amp; if present, though textContent is safer. In our dict we have simple text, but let's use innerHTML just in case.
+      el.innerHTML = dict[key];
     }
-  });
+  }
 }
 
 function startSite() {
