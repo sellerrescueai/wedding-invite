@@ -7,6 +7,8 @@ function initLanguage() {
   const popup = document.getElementById('language-popup');
   
   if (savedLang && window.translations && window.translations[savedLang]) {
+    popup.setAttribute('aria-hidden', 'true');
+    popup.style.display = 'none';
     applyLanguage(savedLang);
     startSite();
   } else {
@@ -29,6 +31,7 @@ function initLanguage() {
         
         // Slight delay before starting animations so popup fade out is smooth
         setTimeout(() => {
+          popup.style.display = 'none';
           startSite();
         }, 300);
       });
