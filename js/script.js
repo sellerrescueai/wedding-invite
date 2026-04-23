@@ -3,7 +3,13 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initLanguage() {
-  const savedLang = localStorage.getItem('preferredLanguage');
+  let savedLang = null;
+  try {
+    savedLang = localStorage.getItem('preferredLanguage');
+  } catch (err) {
+    console.warn("localStorage not available", err);
+  }
+  
   const popup = document.getElementById('language-popup');
   
   if (savedLang && window.translations && window.translations[savedLang]) {
@@ -21,8 +27,14 @@ function initLanguage() {
     const btns = popup.querySelectorAll('.lang-btn');
     btns.forEach(btn => {
       btn.addEventListener('click', (e) => {
-        const lang = e.target.getAttribute('data-lang');
-        localStorage.setItem('preferredLanguage', lang);
+        const lang = e.currentTarget.getAttribute('data-lang') || 'en';
+        
+        try {
+          localStorage.setItem('preferredLanguage', lang);
+        } catch (err) {
+          console.warn("localStorage not available", err);
+        }
+        
         applyLanguage(lang);
         
         // Hide popup
