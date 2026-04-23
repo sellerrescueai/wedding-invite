@@ -195,3 +195,14 @@ button { font-family:inherit; }
   .petal { display:none !important; }
   .anim-up, .reveal-el { opacity:1 !important; transform:none !important; }
 }
+
+/* ══════ LANGUAGE POPUP ══════ */
+.language-popup { position:fixed; inset:0; background:rgba(26, 26, 26, 0.85); backdrop-filter:blur(12px); z-index:9999; display:flex; justify-content:center; align-items:center; opacity:0; pointer-events:none; transition:opacity 0.5s ease; }
+.language-popup[aria-hidden="false"] { opacity:1; pointer-events:all; }
+.language-popup__content { background:var(--cream); padding:48px 40px; border-radius:24px; text-align:center; max-width:90%; width:400px; box-shadow:0 20px 60px rgba(0,0,0,0.4); transform:translateY(20px); transition:transform 0.5s ease; }
+.language-popup[aria-hidden="false"] .language-popup__content { transform:translateY(0); }
+.language-popup__title { font-family:var(--ff-display); font-size:32px; color:var(--text); margin-bottom:12px; }
+.language-popup__desc { font-family:var(--ff-sans); font-size:14px; color:var(--muted); margin-bottom:32px; line-height:1.6; }
+.language-popup__buttons { display:flex; gap:16px; justify-content:center; }
+.lang-btn { font-family:var(--ff-sans); font-size:14px; text-transform:uppercase; letter-spacing:2px; padding:12px 32px; border:1px solid var(--gold); background:transparent; color:var(--text); border-radius:50px; cursor:pointer; transition:all 0.3s ease; }
+.lang-btn:hover { background:var(--gold); color:#fff; }

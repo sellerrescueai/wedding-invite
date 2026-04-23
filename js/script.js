@@ -1,4 +1,57 @@
 document.addEventListener('DOMContentLoaded', () => {
+  initLanguage();
+});
+
+function initLanguage() {
+  const savedLang = localStorage.getItem('preferredLanguage');
+  const popup = document.getElementById('language-popup');
+  
+  if (savedLang && window.translations && window.translations[savedLang]) {
+    applyLanguage(savedLang);
+    startSite();
+  } else {
+    // Show popup
+    popup.setAttribute('aria-hidden', 'false');
+    // Disable scrolling
+    document.body.style.overflow = 'hidden';
+    
+    // Add event listeners to buttons
+    const btns = popup.querySelectorAll('.lang-btn');
+    btns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const lang = e.target.getAttribute('data-lang');
+        localStorage.setItem('preferredLanguage', lang);
+        applyLanguage(lang);
+        
+        // Hide popup
+        popup.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        
+        // Slight delay before starting animations so popup fade out is smooth
+        setTimeout(() => {
+          startSite();
+        }, 300);
+      });
+    });
+  }
+}
+
+function applyLanguage(lang) {
+  if (!window.translations) return;
+  const dict = window.translations[lang];
+  if (!dict) return;
+  
+  document.documentElement.lang = lang; // Update html lang attribute
+  
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (dict[key]) {
+      el.innerHTML = dict[key]; // use innerHTML to allow tags like &amp; if present, though textContent is safer. In our dict we have simple text, but let's use innerHTML just in case.
+    }
+  });
+}
+
+function startSite() {
   initHeroAnim();
   initReveal();
   initPetals();
@@ -7,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initRsvp();
   initEventsCarousel();
   initLightbox();
-});
+}
 
 /* ── Hero stagger animations ── */
 function initHeroAnim() {

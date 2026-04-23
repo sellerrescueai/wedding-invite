@@ -12,6 +12,18 @@
 </head>
 <body>
 
+    <!-- Language Popup Overlay -->
+    <div id="language-popup" class="language-popup" aria-hidden="false">
+        <div class="language-popup__content">
+            <h2 class="language-popup__title">Welcome | स्वागत आहे</h2>
+            <p class="language-popup__desc">Please select your preferred language. <br> कृपया आपली पसंतीची भाषा निवडा.</p>
+            <div class="language-popup__buttons">
+                <button class="lang-btn" data-lang="en">English</button>
+                <button class="lang-btn" data-lang="mr">मराठी</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Floating Petals -->
     <div id="petals-container" aria-hidden="true"></div>
 
@@ -118,21 +130,21 @@
                 </svg>
             </div>
 
-            <p class="hero__blessings anim-up" data-delay="0">With the blessings of our beloved families</p>
+            <p class="hero__blessings anim-up" data-delay="0" data-i18n="hero_blessings">With the blessings of our beloved families</p>
 
             <div class="hero__family anim-up" data-delay="1">
-                <p class="hero__parents">Ashok Zagade &amp; Maya Zagade</p>
+                <p class="hero__parents" data-i18n="hero_parents_1">Ashok Zagade &amp; Maya Zagade</p>
                 <span class="hero__divider-line"></span>
-                <p class="hero__parents">Prafull Kamble &amp; Shukla Kamble</p>
+                <p class="hero__parents" data-i18n="hero_parents_2">Prafull Kamble &amp; Shukla Kamble</p>
             </div>
 
-            <p class="hero__invite-label anim-up" data-delay="2">INVITE YOU</p>
-            <p class="hero__invite-sub anim-up" data-delay="2">to join us in the wedding celebrations of</p>
+            <p class="hero__invite-label anim-up" data-delay="2" data-i18n="hero_invite_label">INVITE YOU</p>
+            <p class="hero__invite-sub anim-up" data-delay="2" data-i18n="hero_invite_sub">to join us in the wedding celebrations of</p>
 
             <h1 class="hero__names anim-up" data-delay="3">
-                <span class="hero__name">Neha</span>
-                <span class="hero__amp">&amp;</span>
-                <span class="hero__name">Pranit</span>
+                <span class="hero__name" data-i18n="hero_name_bride">Neha</span>
+                <span class="hero__amp" data-i18n="hero_amp">&amp;</span>
+                <span class="hero__name" data-i18n="hero_name_groom">Pranit</span>
             </h1>
         </div>
 
@@ -149,9 +161,9 @@
             <img src="images/couple-1.png" alt="Neha & Pranit" class="couple__photo reveal-el" loading="lazy">
         </div>
         <div class="couple__text reveal-el">
-            <p class="label">meet the</p>
-            <h2 class="heading-display">bride <em>&amp;</em> groom</h2>
-            <p class="body-copy">We are both so delighted that you are able to join us in celebrating what we hope will be one of the happiest days of our lives. The affection shown to us by so many people has been incredibly moving, and has touched us both deeply. We look forward to seeing you at the wedding.</p>
+            <p class="label" data-i18n="couple_label">meet the</p>
+            <h2 class="heading-display"><span data-i18n="couple_heading_bride">bride</span> <em data-i18n="couple_heading_amp">&amp;</em> <span data-i18n="couple_heading_groom">groom</span></h2>
+            <p class="body-copy" data-i18n="couple_desc">We are both so delighted that you are able to join us in celebrating what we hope will be one of the happiest days of our lives. The affection shown to us by so many people has been incredibly moving, and has touched us both deeply. We look forward to seeing you at the wedding.</p>
         </div>
     </section>
 
@@ -163,38 +175,38 @@
         <div class="screen__overlay"></div>
 
         <div class="events__content">
-            <p class="label label--light reveal-el">On the following events</p>
+            <p class="label label--light reveal-el" data-i18n="events_label">On the following events</p>
 
             <div class="events__carousel" id="eventsCarousel">
                 <div class="event-slide active" data-index="0">
-                    <h3 class="event__name">Mehendi</h3>
-                    <p class="event__date">Friday, May 15th 2026</p>
-                    <p class="event__venue">Bride's Home</p>
-                    <p class="event__time">11 AM Onwards</p>
+                    <h3 class="event__name" data-i18n="event_mehendi">Mehendi</h3>
+                    <p class="event__date" data-i18n="event_mehendi_date">Friday, May 15th 2026</p>
+                    <p class="event__venue" data-i18n="event_mehendi_venue">Bride's Home</p>
+                    <p class="event__time" data-i18n="event_mehendi_time">11 AM Onwards</p>
                 </div>
                 <div class="event-slide" data-index="1">
-                    <h3 class="event__name">Sangeet</h3>
-                    <p class="event__date">Saturday, May 16th 2026</p>
-                    <p class="event__venue">Gyandev Mangal Karyalaya</p>
-                    <p class="event__time">6 PM Onwards</p>
+                    <h3 class="event__name" data-i18n="event_sangeet">Sangeet</h3>
+                    <p class="event__date" data-i18n="event_sangeet_date">Saturday, May 16th 2026</p>
+                    <p class="event__venue" data-i18n="event_sangeet_venue">Gyandev Mangal Karyalaya</p>
+                    <p class="event__time" data-i18n="event_sangeet_time">6 PM Onwards</p>
                 </div>
                 <div class="event-slide" data-index="2">
-                    <h3 class="event__name">Engagement</h3>
-                    <p class="event__date">Saturday, May 16th 2026</p>
-                    <p class="event__venue">Gyandev Mangal Karyalaya</p>
-                    <p class="event__time">7 PM Onwards</p>
+                    <h3 class="event__name" data-i18n="event_engagement">Engagement</h3>
+                    <p class="event__date" data-i18n="event_engagement_date">Saturday, May 16th 2026</p>
+                    <p class="event__venue" data-i18n="event_engagement_venue">Gyandev Mangal Karyalaya</p>
+                    <p class="event__time" data-i18n="event_engagement_time">7 PM Onwards</p>
                 </div>
                 <div class="event-slide" data-index="3">
-                    <h3 class="event__name">Haldi</h3>
-                    <p class="event__date">Saturday, May 16th 2026</p>
-                    <p class="event__venue">Gyandev Mangal Karyalaya</p>
-                    <p class="event__time">8 PM Onwards</p>
+                    <h3 class="event__name" data-i18n="event_haldi">Haldi</h3>
+                    <p class="event__date" data-i18n="event_haldi_date">Saturday, May 16th 2026</p>
+                    <p class="event__venue" data-i18n="event_haldi_venue">Gyandev Mangal Karyalaya</p>
+                    <p class="event__time" data-i18n="event_haldi_time">8 PM Onwards</p>
                 </div>
                 <div class="event-slide" data-index="4">
-                    <h3 class="event__name">Mangal Parinay</h3>
-                    <p class="event__date">Sunday, May 17th 2026</p>
-                    <p class="event__venue">Gyandev Mangal Karyalaya</p>
-                    <p class="event__time">12:45 PM</p>
+                    <h3 class="event__name" data-i18n="event_mangal_parinay">Mangal Parinay</h3>
+                    <p class="event__date" data-i18n="event_mangal_parinay_date">Sunday, May 17th 2026</p>
+                    <p class="event__venue" data-i18n="event_mangal_parinay_venue">Gyandev Mangal Karyalaya</p>
+                    <p class="event__time" data-i18n="event_mangal_parinay_time">12:45 PM</p>
                 </div>
             </div>
 
@@ -208,7 +220,7 @@
 
             <a href="https://share.google/0qYRnwXA4WcKSzz0n" target="_blank" rel="noopener" class="event__map-btn reveal-el">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
-                See the route
+                <span data-i18n="event_map_btn">See the route</span>
             </a>
         </div>
     </section>
@@ -226,16 +238,16 @@
          ═══════════════════════════════════════════ -->
     <section class="screen screen--rsvp" id="rsvp">
         <div class="rsvp__content">
-            <p class="label reveal-el">Please</p>
-            <h2 class="heading-display reveal-el" style="margin-bottom: 16px;">RSVP</h2>
-            <p class="body-copy reveal-el" style="max-width: 340px; margin: 0 auto 36px;">We would be honoured by your gracious presence as we celebrate this joyous occasion.</p>
+            <p class="label reveal-el" data-i18n="rsvp_label">Please</p>
+            <h2 class="heading-display reveal-el" style="margin-bottom: 16px;" data-i18n="rsvp_heading">RSVP</h2>
+            <p class="body-copy reveal-el" style="max-width: 340px; margin: 0 auto 36px;" data-i18n="rsvp_desc">We would be honoured by your gracious presence as we celebrate this joyous occasion.</p>
 
             <a href="#" id="rsvp-btn" class="whatsapp-btn reveal-el">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                Message on WhatsApp
+                <span data-i18n="rsvp_btn">Message on WhatsApp</span>
             </a>
 
-            <p class="rsvp__call reveal-el">or call <strong>+91 9529822207</strong></p>
+            <p class="rsvp__call reveal-el"><span data-i18n="rsvp_call">or call</span> <strong>+91 9529822207</strong></p>
         </div>
     </section>
 
@@ -244,30 +256,30 @@
          ═══════════════════════════════════════════ -->
     <section class="screen screen--info" id="info">
         <div class="info__content">
-            <p class="label reveal-el">Things to know</p>
-            <p class="body-copy reveal-el" style="max-width:380px; margin: 8px auto 40px;">To help you feel at ease and enjoy every moment of the celebrations, here are a few thoughtful details.</p>
+            <p class="label reveal-el" data-i18n="info_label">Things to know</p>
+            <p class="body-copy reveal-el" style="max-width:380px; margin: 8px auto 40px;" data-i18n="info_desc">To help you feel at ease and enjoy every moment of the celebrations, here are a few thoughtful details.</p>
 
             <div class="info__grid">
                 <div class="info__card reveal-el">
                     <div class="info__icon">📸</div>
-                    <h4 class="info__title">Shared Gallery</h4>
-                    <p class="info__desc">Upload & view candid photos from all ceremonies in our shared album.</p>
-                    <a href="#" id="drive-link" class="info__link" target="_blank" rel="noopener">Open Google Drive →</a>
+                    <h4 class="info__title" data-i18n="info_gallery_title">Shared Gallery</h4>
+                    <p class="info__desc" data-i18n="info_gallery_desc">Upload & view candid photos from all ceremonies in our shared album.</p>
+                    <a href="#" id="drive-link" class="info__link" target="_blank" rel="noopener" data-i18n="info_gallery_link">Open Google Drive →</a>
                 </div>
                 <div class="info__card reveal-el">
                     <div class="info__icon">📍</div>
-                    <h4 class="info__title">Venue</h4>
-                    <p class="info__desc">Gyandev Mangal Karyalaya, Ring Rd, Walmiki Nagar, Khadgaon, Maharashtra 413531</p>
+                    <h4 class="info__title" data-i18n="info_venue_title">Venue</h4>
+                    <p class="info__desc" data-i18n="info_venue_desc">Gyandev Mangal Karyalaya, Ring Rd, Walmiki Nagar, Khadgaon, Maharashtra 413531</p>
                 </div>
                 <div class="info__card reveal-el">
                     <div class="info__icon">👔</div>
-                    <h4 class="info__title">Dress Code</h4>
-                    <p class="info__desc">Traditional / Semi-formal. Wear your finest ethnic wear!</p>
+                    <h4 class="info__title" data-i18n="info_dress_title">Dress Code</h4>
+                    <p class="info__desc" data-i18n="info_dress_desc">Traditional / Semi-formal. Wear your finest ethnic wear!</p>
                 </div>
                 <div class="info__card reveal-el">
                     <div class="info__icon">🅿️</div>
-                    <h4 class="info__title">Parking</h4>
-                    <p class="info__desc">Ample parking is available at the venue for all guests.</p>
+                    <h4 class="info__title" data-i18n="info_parking_title">Parking</h4>
+                    <p class="info__desc" data-i18n="info_parking_desc">Ample parking is available at the venue for all guests.</p>
                 </div>
             </div>
         </div>
@@ -310,33 +322,33 @@
         </div>
 
         <div class="closing__content">
-            <p class="label label--light reveal-el">The countdown begins</p>
+            <p class="label label--light reveal-el" data-i18n="closing_label">The countdown begins</p>
 
             <div class="countdown reveal-el">
                 <div class="countdown__unit">
                     <span class="countdown__num" id="days">00</span>
-                    <span class="countdown__label">Days</span>
+                    <span class="countdown__label" data-i18n="closing_days">Days</span>
                 </div>
                 <span class="countdown__sep">:</span>
                 <div class="countdown__unit">
                     <span class="countdown__num" id="hours">00</span>
-                    <span class="countdown__label">Hours</span>
+                    <span class="countdown__label" data-i18n="closing_hours">Hours</span>
                 </div>
                 <span class="countdown__sep">:</span>
                 <div class="countdown__unit">
                     <span class="countdown__num" id="minutes">00</span>
-                    <span class="countdown__label">Mins</span>
+                    <span class="countdown__label" data-i18n="closing_mins">Mins</span>
                 </div>
                 <span class="countdown__sep">:</span>
                 <div class="countdown__unit">
                     <span class="countdown__num" id="seconds">00</span>
-                    <span class="countdown__label">Secs</span>
+                    <span class="countdown__label" data-i18n="closing_secs">Secs</span>
                 </div>
             </div>
 
-            <p class="closing__msg reveal-el">Our families are excited that you are able to join us in celebrating what we hope will be one of the happiest days of our lives.</p>
+            <p class="closing__msg reveal-el" data-i18n="closing_msg">Our families are excited that you are able to join us in celebrating what we hope will be one of the happiest days of our lives.</p>
 
-            <h2 class="closing__names reveal-el">Neha <em>&amp;</em> Pranit</h2>
+            <h2 class="closing__names reveal-el"><span data-i18n="hero_name_bride">Neha</span> <em data-i18n="hero_amp">&amp;</em> <span data-i18n="hero_name_groom">Pranit</span></h2>
 
             <!-- Ashoka Chakra in footer -->
             <div class="closing__chakra reveal-el" aria-hidden="true">
@@ -376,6 +388,7 @@
         </div>
     </section>
 
+    <script src="js/i18n.js"></script>
     <script src="js/config.js"></script>
     <script src="js/script.js"></script>
 </body>
